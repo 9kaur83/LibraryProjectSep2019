@@ -24,7 +24,7 @@ namespace LibraryProjectSep2019
 
             var customer2 = new Customer
             {
-                CustomerName = "test",
+                CustomerName = "sam",
                 PhoneNumber = "98765439",
                 Email = "abc@gmail.com",
                 Address = "Hwy st, Valley"
