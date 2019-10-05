@@ -4,13 +4,21 @@ using System.Text;
 
 namespace LibraryProjectSep2019
 {
+    enum TypeOfBooks 
+    {
+        Poetry,
+        Fiction,
+        Science,
+        Horror,
+        History
+    }
     class Book
     {
         #region Properties
         /// <summary>
         /// Name of the Book.
         /// </summary>
-        public string BookName { get; set; }
+        public  string BookName { get; set; }
         /// <summary>
         /// ISBN number of the Book.
         /// </summary>
@@ -22,7 +30,11 @@ namespace LibraryProjectSep2019
         /// <summary>
         /// Date and time book issued.
         /// </summary>
-        public DateTime IssueDate { get; private set; }
+        public  DateTime IssueDate { get; set; }
+        /// <summary>
+        /// All books Category.
+        /// </summary>
+        public TypeOfBooks BooksCategory { get; set; }
         #endregion
 
         #region Constructor

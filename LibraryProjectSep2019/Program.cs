@@ -4,17 +4,11 @@ using Twilio.Types;
 
 namespace LibraryProjectSep2019
 {
-    class ProgramC
+    class Program
     {
         static void Main(string[] args)
         {
-            var customer = new Customer
-            {
-                CustomerName = "raj",
-                PhoneNumber = "98765437",
-                Email = "hjy@gmail.com",
-                Address = "34, DR SE bothell"
-            };
+           var customer = Library.CustomerInformation("raj", "98765437", "hjml@gmail.com", "ln sn 7865");
 
             Console.WriteLine($"CN:{customer.CustomerName}" +
                 $",PN:{customer.PhoneNumber}" +
@@ -22,13 +16,7 @@ namespace LibraryProjectSep2019
                 $",address:{customer.Address}" +
                 $",UsID:{customer.UserIDOfCustomer}");
 
-            var customer2 = new Customer
-            {
-                CustomerName = "sam",
-                PhoneNumber = "98765439",
-                Email = "abc@gmail.com",
-                Address = "Hwy st, Valley"
-            };
+            var customer2 = Library.CustomerInformation("sam", "98765439", "abc@gmail.com", "Hwy st, Valley");
 
             Console.WriteLine($"CN:{customer2.CustomerName}" +
                 $",PN:{customer2.PhoneNumber}" +
@@ -36,30 +24,30 @@ namespace LibraryProjectSep2019
                 $",address:{customer2.Address}" +
                 $",UsID:{customer2.UserIDOfCustomer}");
 
-            var book = new Book
-            {
-                BookName = "abc",
-                IsbnNumber = "9865558"
-            };
-      
-            Console.WriteLine($"BN:{book.BookName}" +
-                $",IN:{book.IsbnNumber}" +
-                $",Issued:{book.IssuedUserID != 0}");
+            var Book = Library.BookInformation("klm", "988670", TypeOfBooks.Horror);
 
-            book.IssueBook(customer.UserIDOfCustomer);
+            Console.WriteLine($"BN:{Book.BookName}" +
+            $",IN:{Book.IsbnNumber}" +
+            $",Issued:{Book.IssuedUserID != 0}");
 
-            Console.WriteLine($"BN:{book.BookName}" +
-                $",IN:{book.IsbnNumber}" +
-                $",Issued:{book.IssuedUserID != 0}" +
-                $",IssuedDate:{book.IssueDate}" +
-                $",IssuedByUserId:{book.IssuedUserID}");
+            Book.IssueBook(customer.UserIDOfCustomer);
 
-            book.ReturnBook();
+            Console.WriteLine($"BN:{Book.BookName}" +
+                $",IN:{Book.IsbnNumber}" +
+                $",Issued:{Book.IssuedUserID != 0}" +
+                $",IssuedDate:{Book.IssueDate}" +
+                $",IssuedByUserId:{Book.IssuedUserID}" +
+                $",BC:{Book.BooksCategory}");
 
-            Console.WriteLine($"BN:{book.BookName}" +
-                $",IN:{book.IsbnNumber}" +
-                $",Issued:{book.IssuedUserID != 0}" +
-                $",IssuedDate:{book.IssueDate}");
+            Book.ReturnBook();
+
+            Console.WriteLine($"BN:{Book.BookName}" +
+                $",IN:{Book.IsbnNumber}" +
+                $",Issued:{Book.IssuedUserID != 0}" +
+                $",IssuedDate:{Book.IssueDate}," +
+                $",IssuedByUserId:{Book.IssuedUserID}," +
+                $"BC:{Book.BooksCategory}");
+
         }
     }
 }
