@@ -30,11 +30,15 @@ namespace LibraryProjectSep2019
         /// <summary>
         /// Date and time book issued.
         /// </summary>
-        public  DateTime IssueDate { get; set; }
+        public  DateTime IssuedDate { get; set; }
         /// <summary>
         /// All books Category.
         /// </summary>
         public TypeOfBooks BooksCategory { get; set; }
+        /// <summary>
+        /// price,if book is lost by customer.
+        /// </summary>
+        public decimal ReplacementPrice { get; set; }
         #endregion
 
         #region Constructor
@@ -44,7 +48,7 @@ namespace LibraryProjectSep2019
         public Book()
         {
             IssuedUserID = 0;
-            IssueDate = DateTime.MaxValue;
+            IssuedDate = DateTime.MaxValue;
         }
         #endregion
 
@@ -57,7 +61,7 @@ namespace LibraryProjectSep2019
         public void IssueBook(int userId)
         {
             IssuedUserID = userId;
-            IssueDate = DateTime.Now;
+            IssuedDate = DateTime.Now;
         }
 
         /// <summary>
@@ -66,7 +70,12 @@ namespace LibraryProjectSep2019
         public void ReturnBook()
         {
             IssuedUserID = 0;
-            IssueDate = DateTime.MaxValue;
+            IssuedDate = DateTime.MaxValue;
+        }
+
+        internal static void BookInformation(object bookName, object isbnNumber, object issuedUserID, object issuedDate, string[] booksCategory)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
