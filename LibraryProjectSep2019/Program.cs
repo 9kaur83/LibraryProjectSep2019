@@ -6,7 +6,7 @@ namespace LibraryProjectSep2019
 {
     class Program
     {
-      
+
         static void Main(string[] args)
         {
             Console.WriteLine("********Library App!**********");
@@ -40,7 +40,7 @@ namespace LibraryProjectSep2019
                         //convert enum to array
                         var BooksCategory =
                               Enum.GetNames(typeof(TypeOfBooks));
-             
+
                         //Loop through the array and print out
                         for (var i = 0; i < BooksCategory.Length; i++)
                         {
@@ -60,10 +60,15 @@ namespace LibraryProjectSep2019
 
                         break;
                     case "2":
+                        CheckOutBook();
+
                         break;
                     case "3":
+                        ReturnBook();
                         break;
                     case "4":
+                        PrintAllBooks();
+
                         break;
                     case "5":
                         break;
@@ -77,80 +82,77 @@ namespace LibraryProjectSep2019
                         Console.Write("Phone Number:");
                         var PhoneNumber = Console.ReadLine();
                         Console.Write("Email:");
-                        var Email = Console.ReadLine();
+                        var customerEmail = Console.ReadLine();
                         Console.Write("Address:");
                         var Address = Console.ReadLine();
-                        var Customer = Library.CustomerInformation(CustomerName,PhoneNumber,Email,Address);
-                        Console.WriteLine($"CN:{Customer.CustomerName}" +
-                            $",PN:{Customer.PhoneNumber}" +
-                            $",EM:{Customer.Email}" +
-                            $",AD:{Customer.Address}");
+                        var customer = Library.CustomerInformation(CustomerName, PhoneNumber, customerEmail, Address);
+                        Console.WriteLine($"CN:{customer.CustomerName}" +
+                            $",PN:{customer.PhoneNumber}" +
+                            $",EM:{customer.Email}" +
+                            $",AD:{customer.Address}");
                         break;
                     case "9":
-                        Console.Write("Enter Customer Email:");
-                        var SearchEmail = Console.ReadLine();
-                        var customers = Library.GetAllCustomersByEmail(SearchEmail);
-                        foreach(Customer customer in customers)
-                        {
-                            Console.WriteLine($"CN:{customer.CustomerName}" +
-                                $",PN:{customer.PhoneNumber}" +
-                                $",EM:{customer.Email}" +
-                                $",AD:{customer.Address}");
-                        }
+                        SearchCustomerByEmail();
 
                         break;
 
-
-
-                        
                     default:
                         Console.WriteLine("Please Select A Valid Option");
                         break;
 
                 }
             }
+        }
 
-            /* var customer = Library.CustomerInformation("raj", "98765437", "hjml@gmail.com", "ln sn 7865");
+        private static void SearchCustomerByEmail()
+        {
+            Console.Write("Enter Customer Email:");
+            var searchEmail = Console.ReadLine();
+            var customers = Library.GetAllCustomersByEmail(searchEmail);
+            foreach (var customer in customers)
+            {
+                Console.WriteLine($"CN:{customer.CustomerName}" +
+                    $",PN:{customer.PhoneNumber}" +
+                    $",EM:{customer.Email}" +
+                    $",AD:{customer.Address}");
+            }
+        }
 
-             Console.WriteLine($"CN:{customer.CustomerName}" +
-                 $",PN:{customer.PhoneNumber}" +
-                 $",Email:{customer.Email}" +
-                 $",address:{customer.Address}" +
-                 $",UsID:{customer.UserIDOfCustomer}");
+        private static void ReturnBook()
+        {
+            Console.Write("Enter book name:");
+            var bookName = Console.ReadLine();
+            Library.ReturnBook(bookName);
+            PrintAllBooks(bookName);
+        }
 
-             var customer2 = Library.CustomerInformation("sam", "98765439", "abc@gmail.com", "Hwy st, Valley");
+        private static void CheckOutBook()
+        {
+            Console.Write("Enter Book Name:");
+            var bookName = Console.ReadLine();
+            Console.Write("Enter Email:");
+            var email = Console.ReadLine();
+            Library.IssueBook(email, bookName);
+            PrintAllBooks(bookName);
+        }
 
-             Console.WriteLine($"CN:{customer2.CustomerName}" +
-                 $",PN:{customer2.PhoneNumber}" +
-                 $",Email:{customer2.Email}" +
-                 $",address:{customer2.Address}" +
-                 $",UsID:{customer2.UserIDOfCustomer}");
+        private static void PrintAllBooks(string bookName = null)
+        {
+            if (bookName == null)
+            {
+                Console.Write(" Book Name:");
+                bookName = Console.ReadLine();
+            }
 
-             var Book = Library.BookInformation("klm", "988670", TypeOfBooks.Horror);
-
-             Console.WriteLine($"BN:{Book.BookName}" +
-             $",IN:{Book.IsbnNumber}" +
-             $",Issued:{Book.IssuedUserID != 0}");
-
-             Book.IssueBook(customer.UserIDOfCustomer);
-
-             Console.WriteLine($"BN:{Book.BookName}" +
-                 $",IN:{Book.IsbnNumber}" +
-                 $",Issued:{Book.IssuedUserID != 0}" +
-                 $",IssuedDate:{Book.IssueDate}" +
-                 $",IssuedByUserId:{Book.IssuedUserID}" +
-                 $",BC:{Book.BooksCategory}");
-
-             Book.ReturnBook();
-
-             Console.WriteLine($"BN:{Book.BookName}" +
-                 $",IN:{Book.IsbnNumber}" +
-                 $",Issued:{Book.IssuedUserID != 0}" +
-                 $",IssuedDate:{Book.IssueDate}," +
-                 $",IssuedByUserId:{Book.IssuedUserID}," +
-                 $"BC:{Book.BooksCategory}"); */
-
-
+            var Books = Library.GetAllBooksByName(bookName);
+            foreach (var book in Books)
+            {
+                Console.WriteLine($"BN:{book.BookName}" +
+                    $",IN:{book.IsbnNumber}" +
+                    $",BC:{book.BooksCategory}" +
+                    $",IssuedByUserId:{ book.IssuedUserID}"+
+                    $",IssuedDate:{book.IssuedDate}");
+            }
         }
     }
 }

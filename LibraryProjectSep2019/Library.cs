@@ -27,7 +27,44 @@ namespace LibraryProjectSep2019
             Customers.Add(Customer);
             return Customer;
 
+        } 
+        public static void IssueBook(string email, string bookName)
+        {
+            var book = Books.SingleOrDefault(a => a.BookName == bookName);
+
+            if(book == null)
+            {
+                // Throw exception
+                return;
+            }
+            var customer = Customers.SingleOrDefault(a => a.Email == email);
+
+            if (customer == null)
+            {
+                Console.WriteLine("Customer Not Found");
+                return;
+                
+            }
+            
+            book.IssueBook(customer.UserIDOfCustomer);
         }
+
+        public static void ReturnBook(string bookName)
+        {
+            var book = Books.SingleOrDefault(a => a.BookName == bookName);
+
+            if(book == null)
+            {
+                Console.WriteLine("Book Not Found");
+                return;
+
+            }
+            book.ReturnBook();
+        }
+
+
+            
+
         public static IEnumerable<Customer> GetAllCustomersByEmail(string Email)
         {
            return Customers.Where(a => a.Email == Email);
@@ -49,8 +86,13 @@ namespace LibraryProjectSep2019
             Books.Add(Book);
             return Book;
         }
+        public static IEnumerable<Book> GetAllBooksByName(string BookName)
+        {
+            return Books.Where(a => a.BookName == BookName);
+        }
 
-      
+
+
 
     }
     
