@@ -24,6 +24,7 @@ namespace LibraryProjectSep2019
                 Console.WriteLine("7. Print all books");
                 Console.WriteLine("8. Add Customer");
                 Console.WriteLine("9. Search Customer By Email");
+                Console.WriteLine("10 Print all customer");
 
                 var option = Console.ReadLine();
                 switch (option)
@@ -75,7 +76,18 @@ namespace LibraryProjectSep2019
                     case "6":
                         break;
                     case "7":
-                        break;
+                        Console.Write("Book Name:");
+                        var BookName = Console.ReadLine();
+                        var Books = Library.GetAllBooksByName(BookName);
+                        foreach (var Book in Books)
+                        {
+                            Console.WriteLine($"BN:{Book.BookName}" +
+                            $",IN:{Book.IsbnNumber}" +
+                            $",BC:{Book.BooksCategory}" +
+                            $",IssuedByUserId:{ Book.IssuedUserID}" +
+                            $",IssuedDate:{Book.IssuedDate}");
+                        }
+                         break;
                     case "8":
                         Console.Write("Customer Name:");
                         var CustomerName = Console.ReadLine();
@@ -95,6 +107,19 @@ namespace LibraryProjectSep2019
                         SearchCustomerByEmail();
 
                         break;
+                    case "10":
+                        Console.Write("Customer Email:");
+                        var searchEmail = Console.ReadLine();
+                        var Customers = Library.GetAllCustomersByEmail(searchEmail);
+                        foreach (var customer1 in Customers)
+                        {
+                            Console.WriteLine($"CN:{customer1.CustomerName}" +
+                            $",PN:{customer1.PhoneNumber}" +
+                            $",EM:{customer1.Email}" +
+                            $",AD:{customer1.Address}");
+                        }
+
+                            break;
 
                     default:
                         Console.WriteLine("Please Select A Valid Option");

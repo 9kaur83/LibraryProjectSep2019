@@ -41,8 +41,10 @@ namespace LibraryProjectSep2019
 
             if (customer == null)
             {
-                Console.WriteLine("Customer Not Found");
+               
                 return;
+
+
                 
             }
             
@@ -55,7 +57,7 @@ namespace LibraryProjectSep2019
 
             if(book == null)
             {
-                Console.WriteLine("Book Not Found");
+               
                 return;
 
             }
