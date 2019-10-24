@@ -34,25 +34,25 @@ namespace LibraryProjectSep2019
                         return;
                     case "1":
                         Console.Write("BookName:");
-                        var Name = Console.ReadLine();
+                        var name = Console.ReadLine();
                         Console.Write("IsbnNumber:");
-                        var Number = Console.ReadLine();
+                        var number = Console.ReadLine();
                         Console.WriteLine("Books Category:");
                         //convert enum to array
-                        var BooksCategory =
+                        var booksCategory =
                               Enum.GetNames(typeof(TypeOfBooks));
 
                         //Loop through the array and print out
-                        for (var i = 0; i < BooksCategory.Length; i++)
+                        for (var i = 0; i < booksCategory.Length; i++)
                         {
-                            Console.WriteLine($"{i}.{BooksCategory[i]}");
+                            Console.WriteLine($"{i}.{booksCategory[i]}");
                         }
                         var bookType = Enum.Parse<TypeOfBooks>(Console.ReadLine());
 
                         Console.Write("price: ");
                         var replacementAmount = Convert.ToDecimal(Console.ReadLine());
 
-                        var book = Library.BookInformation(Name, Number, bookType, replacementAmount);
+                        var book = Library.BookInformation(name, number, bookType, replacementAmount);
                         Console.WriteLine($"BN:{book.BookName}" +
                             $",IN:{book.IsbnNumber}" +
                             $",BC:{book.BooksCategory}" +
@@ -68,7 +68,7 @@ namespace LibraryProjectSep2019
                         ReturnBook();
                         break;
                     case "4":
-                        PrintAllBooks();
+                        PrintBookByName();
 
                         break;
                     case "5":
@@ -76,28 +76,26 @@ namespace LibraryProjectSep2019
                     case "6":
                         break;
                     case "7":
-                        Console.Write("Book Name:");
-                        var BookName = Console.ReadLine();
-                        var Books = Library.GetAllBooksByName(BookName);
-                        foreach (var Book in Books)
+                        var books = Library.GetAllBooks();
+                        foreach (var bookItem in books)
                         {
-                            Console.WriteLine($"BN:{Book.BookName}" +
-                            $",IN:{Book.IsbnNumber}" +
-                            $",BC:{Book.BooksCategory}" +
-                            $",IssuedByUserId:{ Book.IssuedUserID}" +
-                            $",IssuedDate:{Book.IssuedDate}");
+                            Console.WriteLine($"BN:{bookItem.BookName}" +
+                            $",IN:{bookItem.IsbnNumber}" +
+                            $",BC:{bookItem.BooksCategory}" +
+                            $",IssuedByUserId:{bookItem.IssuedUserID}" +
+                            $",IssuedDate:{bookItem.IssuedDate}");
                         }
                          break;
                     case "8":
                         Console.Write("Customer Name:");
-                        var CustomerName = Console.ReadLine();
+                        var customerName = Console.ReadLine();
                         Console.Write("Phone Number:");
-                        var PhoneNumber = Console.ReadLine();
+                        var phoneNumber = Console.ReadLine();
                         Console.Write("Email:");
                         var customerEmail = Console.ReadLine();
                         Console.Write("Address:");
-                        var Address = Console.ReadLine();
-                        var customer = Library.CustomerInformation(CustomerName, PhoneNumber, customerEmail, Address);
+                        var address = Console.ReadLine();
+                        var customer = Library.CustomerInformation(customerName, phoneNumber, customerEmail, address);
                         Console.WriteLine($"CN:{customer.CustomerName}" +
                             $",PN:{customer.PhoneNumber}" +
                             $",EM:{customer.Email}" +
@@ -108,10 +106,8 @@ namespace LibraryProjectSep2019
 
                         break;
                     case "10":
-                        Console.Write("Customer Email:");
-                        var searchEmail = Console.ReadLine();
-                        var Customers = Library.GetAllCustomersByEmail(searchEmail);
-                        foreach (var customer1 in Customers)
+                        var customers = Library.GetAllCustomers();
+                        foreach (var customer1 in customers)
                         {
                             Console.WriteLine($"CN:{customer1.CustomerName}" +
                             $",PN:{customer1.PhoneNumber}" +
@@ -148,7 +144,7 @@ namespace LibraryProjectSep2019
             Console.Write("Enter book name:");
             var bookName = Console.ReadLine();
             Library.ReturnBook(bookName);
-            PrintAllBooks(bookName);
+            PrintBookByName(bookName);
         }
 
         private static void CheckOutBook()
@@ -158,10 +154,10 @@ namespace LibraryProjectSep2019
             Console.Write("Enter Email:");
             var email = Console.ReadLine();
             Library.IssueBook(email, bookName);
-            PrintAllBooks(bookName);
+            PrintBookByName(bookName);
         }
 
-        private static void PrintAllBooks(string bookName = null)
+        private static void PrintBookByName(string bookName = null)
         {
             if (bookName == null)
             {
