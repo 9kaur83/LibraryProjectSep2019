@@ -15,7 +15,9 @@ namespace LibraryProjectSep2019
         public DateTime TransactionDate { get; set; }
         public string Description { get; set; }
         public TypeOfTransaction TransactionType { get; set; }
-        public string BookName { get; set; }
+        public virtual Book TransactionBook { get; set; }
+        public string IsbnNumber { get; set; }
+        public virtual Customer TransactionCustomer { get; set; }
         public int UserIDOfCustomer { get; set; }
     }
 }
