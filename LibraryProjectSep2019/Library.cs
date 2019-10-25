@@ -55,7 +55,7 @@ namespace LibraryProjectSep2019
                 TransactionDate = DateTime.Now,
                 TransactionType = TypeOfTransaction.bookIssue,
                 Description = "book Issue",
-                BookName = book.BookName,
+                IsbnNumber = book.IsbnNumber,
                 UserIDOfCustomer = customer.UserIDOfCustomer
             };
 
@@ -79,7 +79,7 @@ namespace LibraryProjectSep2019
                 TransactionDate = DateTime.Now,
                 TransactionType = TypeOfTransaction.bookReturn,
                 Description = "book return",
-                BookName = book.BookName,
+                IsbnNumber = book.IsbnNumber,
                 UserIDOfCustomer = customerID
             };
 
