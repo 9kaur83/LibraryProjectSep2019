@@ -7,8 +7,7 @@ namespace LibraryProjectSep2019
 {
    static class Library
     {
-        private static List<Customer> Customers = new List<Customer>();
-        private static List<Transaction> Transactions = new List<Transaction>();
+        private static LibraryContext db = new LibraryContext();
         public static Customer CustomerInformation(string CustomerName,
           string PhoneNumber,
           string Email,
@@ -27,25 +26,31 @@ namespace LibraryProjectSep2019
                 Console.WriteLine("Phone Number Invalid");
             }
 
-            Customers.Add(customer);
+            db.Customers.Add(customer);
+            db.SaveChanges();
 
             return customer;
 
         }
         public static void IssueBook(string email, string bookName)
         {
-            var book = Books.SingleOrDefault(a => a.BookName == bookName);
+            var book = db.Books.SingleOrDefault(a => a.BookName == bookName);
 
             if (book == null)
             {
                 // Throw exception
                 return;
             }
-            var customer = Customers.SingleOrDefault(a => a.Email == email);
+            var customer = db.Customers.SingleOrDefault(a => a.Email == email);
 
             if (customer == null)
             {
                 return;
+            }
+
+            if (book.IssuedUserID != 0)
+            {
+                throw new InvalidOperationException("The book is already issued");
             }
 
             book.IssueBook(customer.UserIDOfCustomer);
@@ -59,12 +64,13 @@ namespace LibraryProjectSep2019
                 UserIDOfCustomer = customer.UserIDOfCustomer
             };
 
-            Transactions.Add(transaction);
+            db.Transactions.Add(transaction);
+            db.SaveChanges();
         }
 
         public static void ReturnBook(string bookName)
         {
-            var book = Books.SingleOrDefault(a => a.BookName == bookName);
+            var book = db.Books.SingleOrDefault(a => a.BookName == bookName);
 
             if(book == null)
             {               
@@ -83,22 +89,33 @@ namespace LibraryProjectSep2019
                 UserIDOfCustomer = customerID
             };
 
-            Transactions.Add(Trasaction);
+            db.Transactions.Add(Trasaction);
+            db.SaveChanges();
         }
         public static IEnumerable<Customer> GetAllCustomers()
         {
-            return Customers;
+            return db.Customers;
         }
         public static IEnumerable<Customer> GetAllCustomersByEmail(string email)
         {
-           return Customers.Where(a => a.Email == email);
+            return db.Customers.Where(a => a.Email == email);
         }
-      
-        private static List<Book> Books = new List<Book>();
+        public static IEnumerable<Transaction> GetAllTransactionByEmail(string email)
+        {
+            var customer = db.Customers.SingleOrDefault(a => a.Email == email);
+
+            if (customer == null)
+            {
+                return null;
+            }
+            return db.Transactions.Where(t => t.UserIDOfCustomer == customer.UserIDOfCustomer)
+                               .OrderByDescending(t => t.TransactionDate);
+        }
+
         public static Book BookInformation(string BookName,
             string ISBNNumber,
-            TypeOfBooks BooksCategory,
-            decimal replacementPrice)
+            TypeOfBooks BooksCategory = TypeOfBooks.Fiction,
+            decimal replacementPrice = 0)
         {
             var book = new Book
             {
@@ -107,19 +124,20 @@ namespace LibraryProjectSep2019
                 BooksCategory = BooksCategory,
                 ReplacementPrice = replacementPrice
             };
-            Books.Add(book);
+            db.Books.Add(book);
+            db.SaveChanges();
 
             return book;
         }
 
         public static IEnumerable<Book> GetAllBooks()
         {
-            return Books;
+            return db.Books;
         }
 
         public static IEnumerable<Book> GetAllBooksByName(string bookName)
         {
-            return Books.Where(a => a.BookName == bookName);
+            return db.Books.Where(a => a.BookName == bookName);
         }
     }
 }

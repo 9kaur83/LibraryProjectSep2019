@@ -24,7 +24,8 @@ namespace LibraryProjectSep2019
                 Console.WriteLine("7. Print all books");
                 Console.WriteLine("8. Add Customer");
                 Console.WriteLine("9. Search Customer By Email");
-                Console.WriteLine("10 Print all customer");
+                Console.WriteLine("10. Print all customer");
+                Console.WriteLine("11. Print all transactions");
 
                 var option = Console.ReadLine();
                 switch (option)
@@ -61,7 +62,15 @@ namespace LibraryProjectSep2019
 
                         break;
                     case "2":
-                        CheckOutBook();
+
+                        try
+                        {
+                            CheckOutBook();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.Error.WriteLine(ex.Message);
+                        }
 
                         break;
                     case "3":
@@ -72,6 +81,7 @@ namespace LibraryProjectSep2019
 
                         break;
                     case "5":
+
                         break;
                     case "6":
                         break;
@@ -106,15 +116,22 @@ namespace LibraryProjectSep2019
 
                         break;
                     case "10":
-                        var customers = Library.GetAllCustomers();
-                        foreach (var customer1 in customers)
+                        PrintAllCustomer();
+                        break;
+                    case "11":
+                        Console.Write("Enter Customer Email:");
+                        var searchEmail = Console.ReadLine();
+                        var transactions = Library.GetAllTransactionByEmail(searchEmail);
+                        foreach (var transaction in transactions)
                         {
-                            Console.WriteLine($"CN:{customer1.CustomerName}" +
-                            $",PN:{customer1.PhoneNumber}" +
-                            $",EM:{customer1.Email}" +
-                            $",AD:{customer1.Address}");
+                            Console.WriteLine($"TI:{transaction.Id}" +
+                                $",TD:{transaction.TransactionDate}" +
+                                $",TT:{transaction.TransactionType }" +
+                                $",TB:{transaction.TransactionBook}" +
+                                $",TN:{transaction.IsbnNumber}" +
+                                $",TC:{transaction.TransactionCustomer}" +
+                                $",TID:{transaction.Id}");
                         }
-
                             break;
 
                     default:
@@ -122,6 +139,18 @@ namespace LibraryProjectSep2019
                         break;
 
                 }
+            }
+        }
+
+        private static void PrintAllCustomer()
+        {
+            var customers = Library.GetAllCustomers();
+            foreach (var customer in customers)
+            {
+                Console.WriteLine($"CN:{customer.CustomerName}" +
+                $",PN:{customer.PhoneNumber}" +
+                $",EM:{customer.Email}" +
+                $",AD:{customer.Address}");
             }
         }
 

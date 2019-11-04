@@ -6,8 +6,6 @@ namespace LibraryProjectSep2019
 {
     class Customer
     {
-        private static int lastCustomerId = 0;
-
         #region Properties
         /// <summary>
         /// Name of the customer.
@@ -36,7 +34,6 @@ namespace LibraryProjectSep2019
 
         public Customer()
         {
-            UserIDOfCustomer = ++lastCustomerId;
         }
 
         #endregion
