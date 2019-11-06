@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LibraryProjectSep2019
 {
-    class Customer
+     public class Customer
     {
         #region Properties
         /// <summary>

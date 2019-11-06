@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LibraryProjectSep2019
 {
-   static class Library
+    public static class Library
     {
         private static LibraryContext db = new LibraryContext();
         public static Customer CustomerInformation(string CustomerName,

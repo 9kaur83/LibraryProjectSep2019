@@ -2,14 +2,14 @@
 
 namespace LibraryProjectSep2019
 {
-    enum TypeOfTransaction
+    public enum TypeOfTransaction
     {
         bookIssue,
         bookReturn
     }
 
 
-    class Transaction
+    public class Transaction
     {
         public int Id { get; set; }
         public DateTime TransactionDate { get; set; }

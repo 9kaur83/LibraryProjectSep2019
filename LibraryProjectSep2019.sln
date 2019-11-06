@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryProjectSep2019", "LibraryProjectSep2019\LibraryProjectSep2019.csproj", "{159E56B7-3D4C-40A4-BA40-23C8CE2C3F5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryProjectSep2019", "LibraryProjectSep2019\LibraryProjectSep2019.csproj", "{159E56B7-3D4C-40A4-BA40-23C8CE2C3F5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryUI", "LibraryUI\LibraryUI.csproj", "{2A22CB61-19A8-4F4F-82A4-D7CA7AE3716F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{159E56B7-3D4C-40A4-BA40-23C8CE2C3F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{159E56B7-3D4C-40A4-BA40-23C8CE2C3F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{159E56B7-3D4C-40A4-BA40-23C8CE2C3F5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A22CB61-19A8-4F4F-82A4-D7CA7AE3716F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A22CB61-19A8-4F4F-82A4-D7CA7AE3716F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A22CB61-19A8-4F4F-82A4-D7CA7AE3716F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A22CB61-19A8-4F4F-82A4-D7CA7AE3716F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

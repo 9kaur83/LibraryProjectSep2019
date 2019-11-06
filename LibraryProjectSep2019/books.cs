@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LibraryProjectSep2019
 {
-    enum TypeOfBooks 
+    public enum TypeOfBooks 
     {
         Poetry,
         Fiction,
@@ -12,7 +12,8 @@ namespace LibraryProjectSep2019
         Horror,
         History
     }
-    class Book
+    
+    public class Book
     {
         #region Properties
         /// <summary>

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LibraryProjectSep2019
 {
-    class LibraryContext : DbContext
+     public class LibraryContext : DbContext
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Customer> Customers { get; set; }
