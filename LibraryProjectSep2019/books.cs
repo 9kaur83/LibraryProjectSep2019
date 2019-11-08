@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace LibraryProjectSep2019
 {
     public enum TypeOfBooks 
     {
+        [Display(Name = "Poetry")]
         Poetry,
+        [Display(Name = "Fiction")]
         Fiction,
+        [Display(Name = "Science")]
         Science,
+        [Display(Name = "Horror")]
         Horror,
+        [Display(Name = "History")]
         History
     }
     
@@ -78,7 +84,7 @@ namespace LibraryProjectSep2019
         {
             throw new NotImplementedException();
         }
-
+  
         #endregion
     }
 }

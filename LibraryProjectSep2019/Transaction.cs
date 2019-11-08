@@ -8,7 +8,6 @@ namespace LibraryProjectSep2019
         bookReturn
     }
 
-
     public class Transaction
     {
         public int Id { get; set; }
