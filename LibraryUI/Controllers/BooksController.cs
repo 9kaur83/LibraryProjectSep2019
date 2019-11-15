@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LibraryProjectSep2019;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryUI.Controllers
 {
+    [Authorize]
     public class BooksController : Controller
     {
         private readonly LibraryContext _context = new LibraryContext();
@@ -16,7 +18,7 @@ namespace LibraryUI.Controllers
         // GET: Books
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Books.ToListAsync());
+            return View(Library.GetAllBooks());
         }
 
         // GET: Books/Details/5

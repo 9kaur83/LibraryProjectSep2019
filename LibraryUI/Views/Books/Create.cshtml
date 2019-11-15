@@ -23,18 +23,8 @@
                 <span asp-validation-for="IsbnNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IssuedUserID" class="control-label"></label>
-                <input asp-for="IssuedUserID" class="form-control" />
-                <span asp-validation-for="IssuedUserID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IssuedDate" class="control-label"></label>
-                <input asp-for="IssuedDate" class="form-control" />
-                <span asp-validation-for="IssuedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="BooksCategory" class="control-label"></label>
-                <select asp-for="BooksCategory" class="form-control" asp-items="Html.GetEnumSelectList<LibraryProjectSep2019.TypeOfBooks>()"></select>
+                <select asp-for="BooksCategory" class="form-control" asp-items="Html.GetEnumSelectList<TypeOfBooks>()"></select>
                 <span asp-validation-for="BooksCategory" class="text-danger"></span>
             </div>
             <div class="form-group">
