@@ -96,10 +96,42 @@ namespace LibraryProjectSep2019
         {
             return db.Customers;
         }
+
         public static IEnumerable<Customer> GetAllCustomersByEmail(string email)
         {
             return db.Customers.Where(a => a.Email == email);
         }
+
+        public static Book GetBookByIsbnNumber(string isbnNumber)
+        {
+            return db.Books.Find(isbnNumber);
+        }
+
+        public static void UpdateBook(Book updatedBook)
+        {
+            var oldBook = GetBookByIsbnNumber(updatedBook.IsbnNumber);
+            oldBook.BookName = updatedBook.BookName;
+            oldBook.BooksCategory = updatedBook.BooksCategory;
+            oldBook.IssuedUserID = updatedBook.IssuedUserID;
+            oldBook.IssuedDate = updatedBook.IssuedDate;
+            oldBook.ReplacementPrice = updatedBook.ReplacementPrice;
+            db.SaveChanges();
+        } 
+
+        public static void UpdateCustomer(Customer updatedCustomer)
+        {
+            var oldCustomer = GetCustomerByUserID(updatedCustomer.UserIDOfCustomer);
+            oldCustomer.CustomerName = updatedCustomer.CustomerName;
+            oldCustomer.PhoneNumber = updatedCustomer.PhoneNumber;
+            oldCustomer.Email = updatedCustomer.Email;
+            oldCustomer.Address = updatedCustomer.Address;
+            db.SaveChanges();
+        }
+        public static Customer GetCustomerByUserID(int userID)
+        {
+            return db.Customers.Find(userID);
+        }
+
         public static IEnumerable<Transaction> GetAllTransactionByEmail(string email)
         {
             var customer = db.Customers.SingleOrDefault(a => a.Email == email);

@@ -29,8 +29,7 @@ namespace LibraryUI.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.UserIDOfCustomer == id);
+            var customer = Library.GetCustomerByUserID(id.Value);
             if (customer == null)
             {
                 return NotFound();
@@ -68,7 +67,7 @@ namespace LibraryUI.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = Library.GetCustomerByUserID(id.Value);
             if (customer == null)
             {
                 return NotFound();
@@ -92,8 +91,7 @@ namespace LibraryUI.Controllers
             {
                 try
                 {
-                    _context.Update(customer);
-                    await _context.SaveChangesAsync();
+                    Library.UpdateCustomer(customer);
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -29,8 +29,7 @@ namespace LibraryUI.Controllers
                 return NotFound();
             }
 
-            var book = await _context.Books
-                .FirstOrDefaultAsync(m => m.IsbnNumber == id);
+            var book = Library.GetBookByIsbnNumber(id);
             if (book == null)
             {
                 return NotFound();
@@ -69,7 +68,7 @@ namespace LibraryUI.Controllers
                 return NotFound();
             }
 
-            var book = await _context.Books.FindAsync(id);
+            var book = Library.GetBookByIsbnNumber(id);
             if (book == null)
             {
                 return NotFound();
@@ -93,8 +92,7 @@ namespace LibraryUI.Controllers
             {
                 try
                 {
-                    _context.Update(book);
-                    await _context.SaveChangesAsync();
+                    Library.UpdateBook(book);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
