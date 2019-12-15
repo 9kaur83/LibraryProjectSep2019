@@ -36,10 +36,12 @@ namespace LibraryProjectSep2019
         {
             var book = db.Books.SingleOrDefault(a => a.BookName == bookName);
 
-            if (book == null)
+            
             {
-                // Throw exception
-                return;
+               if (string.IsNullOrEmpty(email)|| string.IsNullOrWhiteSpace(email))
+                {
+                    throw new ArgumentNullException("email", "email is required");
+                }
             }
             var customer = db.Customers.SingleOrDefault(a => a.Email == email);
 

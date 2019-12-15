@@ -46,6 +46,7 @@ namespace LibraryProjectSep2019
         /// price,if book is lost by customer.
         /// </summary>
         public decimal ReplacementPrice { get; set; }
+        public object IssueDate { get; internal set; }
         #endregion
 
         #region Constructor
