@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UserSecretsId>aspnet-LibraryUI-634A34A0-352A-425D-B1C8-1423485478F8</UserSecretsId>
     <ApplicationIcon />
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <StartupObject />
   </PropertyGroup>
 

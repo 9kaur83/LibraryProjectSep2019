@@ -13,8 +13,6 @@ namespace LibraryUI.Controllers
     [Authorize]
     public class CustomersController : Controller
     {
-        private readonly LibraryContext _context = new LibraryContext();
-
         // GET: Customers
         public async Task<IActionResult> Index()
         {
@@ -63,6 +61,7 @@ namespace LibraryUI.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
+                
             {
                 return NotFound();
             }
@@ -89,28 +88,13 @@ namespace LibraryUI.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    Library.UpdateCustomer(customer);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CustomerExists(customer.UserIDOfCustomer))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+               
+                Library.UpdateCustomer(customer);
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(customer);
         }
-        private bool CustomerExists(int id)
-        {
-            return _context.Customers.Any(e => e.UserIDOfCustomer == id);
-        }
+   
     }
 }

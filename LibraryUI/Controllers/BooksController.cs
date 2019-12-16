@@ -13,7 +13,7 @@ namespace LibraryUI.Controllers
     [Authorize]
     public class BooksController : Controller
     {
-        private readonly LibraryContext _context = new LibraryContext();
+       
 
         // GET: Books
         public async Task<IActionResult> Index()
@@ -53,10 +53,9 @@ namespace LibraryUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(book);
-                await _context.SaveChangesAsync();
+                Library.BookInformation(book.BookName,book.IsbnNumber,book.BooksCategory,book.ReplacementPrice);
                 return RedirectToAction(nameof(Index));
-            }
+            }   
             return View(book);
         }
 
@@ -90,28 +89,26 @@ namespace LibraryUI.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    Library.UpdateBook(book);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BookExists(book.IsbnNumber))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+               
+                Library.UpdateBook(book);
+                
+              
                 return RedirectToAction(nameof(Index));
             }
             return View(book);
         }
-        private bool BookExists(string id)
+       
+        //Get
+        public IActionResult bookIssue(String id)
         {
-            return _context.Books.Any(e => e.IsbnNumber == id);
-        }
+            if (id == null)
+                return NotFound();
+
+            var book = Library.GetBookByIsbnNumber(id);
+            if (book == null)
+                return NotFound();
+
+            return View(book);
+        }    
     }
 }
