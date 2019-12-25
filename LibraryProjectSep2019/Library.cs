@@ -36,14 +36,12 @@ namespace LibraryProjectSep2019
         {
             var book = db.Books.SingleOrDefault(a => a.BookName == bookName);
 
-            
+            if (string.IsNullOrEmpty(email)|| string.IsNullOrWhiteSpace(email))
             {
-               if (string.IsNullOrEmpty(email)|| string.IsNullOrWhiteSpace(email))
-                {
-                    throw new ArgumentNullException("email", "email is required");
-                }
+                throw new ArgumentNullException("email", "email is required");
             }
-            var customer = db.Customers.SingleOrDefault(a => a.Email == email);
+            
+            var customer = db.Customers.FirstOrDefault(a => a.Email == email);
 
             if (customer == null)
             {
@@ -136,7 +134,7 @@ namespace LibraryProjectSep2019
 
         public static IEnumerable<Transaction> GetAllTransactionByEmail(string email)
         {
-            var customer = db.Customers.SingleOrDefault(a => a.Email == email);
+            var customer = db.Customers.FirstOrDefault(a => a.Email == email);
 
             if (customer == null)
             {
@@ -164,7 +162,7 @@ namespace LibraryProjectSep2019
             return book;
         }
 
-        public static IEnumerable<Book> GetAllBooks()
+        public static IEnumerable<Book> GetAllBooks(string name)
         {
             return db.Books;
         }

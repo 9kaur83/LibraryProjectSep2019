@@ -51,7 +51,9 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IsbnNumber">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.IsbnNumber">Details</a> |
-                <a asp-action="bookIssue" asp-route-id="@item.IsbnNumber">bookIssue</a>
+                <a asp-action="bookIssue" asp-route-id="@item.IsbnNumber">bookIssue</a> |
+                <a asp-action="bookReturn" asp-route-id="@item.IsbnNumber">bookReturn</a> |
+                <a asp-action="transactions" asp-route-id="@item.IsbnNumber">transactions</a>
             </td>
         </tr>
 }

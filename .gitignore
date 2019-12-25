@@ -9,3 +9,6 @@
 /LibraryProjectSep2019/bin/Debug/netcoreapp2.2
 /LibraryUI/bin/Debug/netcoreapp3.0
 /LibraryUI/obj
+/LibraryTest/obj
+/LibraryUI/bin/Release/netcoreapp3.0
+/LibraryProjectSep2019/bin/Release/netcoreapp2.2

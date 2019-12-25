@@ -7,18 +7,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LibraryProjectSep2019;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace LibraryUI.Controllers
 {
     [Authorize]
     public class BooksController : Controller
     {
-       
 
+        public string username { get; set; }
         // GET: Books
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(Library.GetAllBooks());
+            if (HttpContext != null && !string.IsNullOrEmpty(HttpContext.User.Identity.Name))
+            {
+                username = HttpContext.User.Identity.Name;
+            }
+
+            return View(Library.GetAllBooks(username));
         }
 
         // GET: Books/Details/5
@@ -53,9 +59,9 @@ namespace LibraryUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                Library.BookInformation(book.BookName,book.IsbnNumber,book.BooksCategory,book.ReplacementPrice);
+                Library.BookInformation(book.BookName, book.IsbnNumber, book.BooksCategory, book.ReplacementPrice);
                 return RedirectToAction(nameof(Index));
-            }   
+            }
             return View(book);
         }
 
@@ -89,15 +95,15 @@ namespace LibraryUI.Controllers
 
             if (ModelState.IsValid)
             {
-               
+
                 Library.UpdateBook(book);
-                
-              
+
+
                 return RedirectToAction(nameof(Index));
             }
             return View(book);
         }
-       
+
         //Get
         public IActionResult bookIssue(String id)
         {
@@ -109,6 +115,55 @@ namespace LibraryUI.Controllers
                 return NotFound();
 
             return View(book);
-        }    
+        }
+
+        [HttpPost]
+        public IActionResult bookIssue(IFormCollection controls)
+        {
+            var IsbnNumber = controls["IsbnNumber"];
+            var email = this.User.Identity.Name;
+            var bookName = controls["bookName"];
+
+            Library.IssueBook(email, bookName);
+
+            return RedirectToAction(nameof(Index));
+        }
+        //Get
+        public IActionResult bookReturn(String id)
+        {
+            if (id == null)
+                return NotFound();
+
+           var book = Library.GetBookByIsbnNumber(id);
+            if (book == null)
+                return NotFound();
+
+            return View(book);
+        }
+
+        [HttpPost]
+        public IActionResult bookReturn(IFormCollection controls)
+        {
+            var IsbnNumber = controls["IsbnNumber"];
+            var bookName = controls["bookName"];
+
+            Library.ReturnBook(bookName);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        //Get
+        public IActionResult Transactions(String id)
+        {
+            if (id == null)
+                return NotFound();
+            var email = this.User.Identity.Name;
+            var transactions = Library.GetAllTransactionByEmail(email);
+
+           
+            return View(transactions);
+        }
     }
 }
+
+   

@@ -14,6 +14,8 @@ namespace LibraryProjectSep2019
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@" Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = LibraryOct2019; Integrated Security = True; Connect Timeout = 30;");
+
+            // optionsBuilder.UseSqlServer(@" Server=tcp:libraryuioct2019dbserver.database.windows.net,1433;Initial Catalog=LibraryUIoct2019_db;Persist Security Info=False;User ID=Lovehundel;Password=Loveleen9;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,10 +40,10 @@ namespace LibraryProjectSep2019
 
             modelBuilder.Entity<Customer>(entity =>
             {
-                entity.HasKey(a => a.UserIDOfCustomer).HasName("PK_UserID");
-
                 entity.Property(a => a.UserIDOfCustomer).ValueGeneratedOnAdd();
 
+                entity.HasKey(a => a.UserIDOfCustomer).HasName("PK_UserID");
+          
                 entity.Property(a => a.PhoneNumber).IsRequired();
 
                 entity.Property(a => a.Email).IsRequired().HasMaxLength(100);

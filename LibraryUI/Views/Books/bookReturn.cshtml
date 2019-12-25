@@ -1,7 +1,7 @@
 ﻿@model LibraryProjectSep2019.Book
 
 @{
-    ViewData["Title"] = "bookIssue";
+    ViewData["Title"] = "bookReturn";
 }
 
 <h1>bookIssue</h1>
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="bookIssue">
+        <form asp-action="bookReturn">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="BookName" class="control-label"></label>
@@ -20,7 +20,7 @@
             <input type="hidden" asp-for="IsbnNumber" />
            
             <div class="form-group">
-                <input type="submit" value="bookIssue" class="btn btn-primary" />
+                <input type="submit" value="bookReturn" class="btn btn-primary" />
             </div>
         </form>
     </div>
